@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+const API = 'https://jsonplaceholder.typicode.com/users'
+
+const App = props => {
+  const [monsters, setMonsters] = useState([])
+
+  useEffect(() => {
+    fetch(API)
+      .then(res => res.json())
+      .then(users => setMonsters(users))
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        monsters.map(monster => <h1 key={monster.id}>{monster.name}</h1>)
+      }
     </div>
   );
 }
