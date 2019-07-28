@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CardList } from './components/card-list/card-list.component'
 import './App.css';
 
 const API = 'https://jsonplaceholder.typicode.com/users'
@@ -10,13 +11,11 @@ const App = props => {
     fetch(API)
       .then(res => res.json())
       .then(users => setMonsters(users))
-  })
+  }, [])
 
   return (
     <div className="App">
-      {
-        monsters.map(monster => <h1 key={monster.id}>{monster.name}</h1>)
-      }
+      <CardList monsters={monsters} />
     </div>
   );
 }
